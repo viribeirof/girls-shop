@@ -24,6 +24,10 @@ public class ClienteService {
     }
 
     public Cliente salvar(Cliente cliente) {
+        if (clienteRepository.existsByEmail(cliente.getEmail())) {
+            throw new RuntimeException("Já existe um cliente cadastrado com este e-mail.");
+        }
+
         return clienteRepository.save(cliente);
     }
 
